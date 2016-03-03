@@ -58,14 +58,37 @@ class DraggableImageView: UIView {
         
         
         if sender.state == UIGestureRecognizerState.Began {
-//            print("Gesture began at: \(point)")
             originalProfileCenter = sender.view!.center
         } else if sender.state == UIGestureRecognizerState.Changed {
             print("Gesture changed at: \(point)")
-            sender.view?.center.x = originalProfileCenter.x + translation.x
-//            self.view.center.x = originalProfileCenter.x + translation.x
+            if let v = sender.view {
+                
+                var rad = translation.x.degreesToRadians
+                if rad > 45 {
+                    rad = 45
+                }
+
+                if translation.x > 0 { // to the right
+                    print("rotate clockwise")
+                    
+                    v.transform = CGAffineTransformMakeRotation(rad)
+                    
+                } else if translation.x < 0 { // to the left
+                    print("rotate counter-clockwise")
+                    
+                    v.transform = CGAffineTransformMakeRotation(-rad)
+                }
+
+                v.center.x = originalProfileCenter.x + translation.x
+            }
         } else if sender.state == UIGestureRecognizerState.Ended {
             print("Gesture ended at: \(point)")
         }
+    }
+}
+
+extension CGFloat {
+    var degreesToRadians : CGFloat {
+        return CGFloat(self) * CGFloat(M_PI) / 180.0
     }
 }
