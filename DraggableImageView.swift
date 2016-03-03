@@ -62,7 +62,8 @@ class DraggableImageView: UIView {
             originalProfileCenter = sender.view!.center
             originalPanStart = point
         } else if sender.state == UIGestureRecognizerState.Changed {
-            print("Gesture changed at: \(point)")
+//            print("Gesture changed at: \(point)")
+            print("translation.x = \(translation.x)")
             if let v = sender.view {
                 
                 var rad = translation.x.degreesToRadians
@@ -83,12 +84,26 @@ class DraggableImageView: UIView {
 
                     let radians = point.y > midY ? rad : -rad
                     v.transform = CGAffineTransformMakeRotation(-radians)
+
                 }
 
-                v.center.x = originalProfileCenter.x + translation.x
+                if translation.x > 50 {
+                    v.center.x = 500
+                } else if translation.x < -50 {
+                    v.center.x = -500
+                } else {
+                    
+                    print("setting the profile center to \(originalProfileCenter.x + translation.x)")
+                    v.center.x = originalProfileCenter.x + translation.x
+                }
             }
         } else if sender.state == UIGestureRecognizerState.Ended {
             print("Gesture ended at: \(point)")
+            
+            if abs(translation.x) < 50 {
+                sender.view?.transform = CGAffineTransformIdentity
+                sender.view?.center = originalProfileCenter
+            }
         }
     }
 }
