@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CardsViewController.swift
 //  Tinder
 //
 //  Created by Marcel Weekes on 3/2/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CardsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
