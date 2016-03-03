@@ -12,19 +12,18 @@ class DraggableImageView: UIView {
 
     /*
     // Only override drawRect: if you perform custom drawing.
+    @IBOutlet var contentView: DraggableImageView!
     // An empty implementation adversely affects performance during animation.
     */
 
+    @IBOutlet var contentView: DraggableImageView!
     @IBOutlet weak var imageView: UIImageView!
     
-    var image: UIImage!
-    var originalProfileCenter: CGPoint!
-    
-    override func drawRect(rect: CGRect) {
-    //    imageView.image = image
-        let pgr = UIPanGestureRecognizer(target: self, action: "onDrag:")
-        imageView.addGestureRecognizer(pgr)
+    var image: UIImage? {
+        get { return contentView.imageView.image }
+        set { contentView.imageView.image = newValue }
     }
+    var originalProfileCenter: CGPoint!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -38,11 +37,17 @@ class DraggableImageView: UIView {
     
     func initSubviews() {
         // standard initialization logic
-        let nib = UINib(nibName: "DraggableImageView", bundle: nil)
-        nib.instantiateWithOwner(self, options: nil)
-        imageView.frame = bounds
-        addSubview(imageView)
+        if (self.subviews.count == 0) {
+            imageView = UIImageView()
+            let nib = UINib(nibName: "DraggableImageView", bundle: nil)
+            nib.instantiateWithOwner(self, options: nil)
+            contentView.frame = self.bounds
+            addSubview(contentView)
             
+            let pgr = UIPanGestureRecognizer(target: self, action: "onDrag:")
+            contentView.addGestureRecognizer(pgr)
+        }
+        
         // custom initialization logic
     }
     

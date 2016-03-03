@@ -20,9 +20,6 @@ class CardsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        /* imageView = DraggableImageView(frame: CGRectMake(8, 132, view.bounds.width, 200))
-        imageView.image = UIImage(named: "ryan")
-        view.addSubview(imageView) */
         let ryan = UIImage(named: "ryan")
         profileImageView.image = ryan
     }
