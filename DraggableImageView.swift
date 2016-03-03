@@ -24,6 +24,7 @@ class DraggableImageView: UIView {
         set { contentView.imageView.image = newValue }
     }
     var originalProfileCenter: CGPoint!
+    var originalPanStart: CGPoint!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,6 +60,7 @@ class DraggableImageView: UIView {
         
         if sender.state == UIGestureRecognizerState.Began {
             originalProfileCenter = sender.view!.center
+            originalPanStart = point
         } else if sender.state == UIGestureRecognizerState.Changed {
             print("Gesture changed at: \(point)")
             if let v = sender.view {
@@ -67,16 +69,20 @@ class DraggableImageView: UIView {
                 if rad > 45 {
                     rad = 45
                 }
+                
+                let midY = CGRectGetMidY(v.bounds)
 
                 if translation.x > 0 { // to the right
                     print("rotate clockwise")
-                    
-                    v.transform = CGAffineTransformMakeRotation(rad)
+
+                    let radians = point.y < midY ? rad : -rad
+                    v.transform = CGAffineTransformMakeRotation(radians)
                     
                 } else if translation.x < 0 { // to the left
                     print("rotate counter-clockwise")
-                    
-                    v.transform = CGAffineTransformMakeRotation(-rad)
+
+                    let radians = point.y > midY ? rad : -rad
+                    v.transform = CGAffineTransformMakeRotation(-radians)
                 }
 
                 v.center.x = originalProfileCenter.x + translation.x
