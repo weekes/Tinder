@@ -21,29 +21,21 @@
                                 <rect key="frame" x="0.0" y="460" width="320" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryan" id="YX8-ZM-z6z">
+                            <view contentMode="scaleToFill" id="Gpa-er-AJR" customClass="DraggableImageView" customModule="Tinder" customModuleProvider="target">
                                 <rect key="frame" x="8" y="132" width="304" height="304"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="7fl-5l-5wM" appends="YES" id="e0Z-5h-SXy"/>
-                                </connections>
-                            </imageView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="actionButtonsImageView" destination="mM0-8D-mSy" id="m4f-vE-mdf"/>
                         <outlet property="navBarImageView" destination="qTy-Pt-AU3" id="AdO-5v-Tal"/>
-                        <outlet property="profilePicImageView" destination="YX8-ZM-z6z" id="tUr-1U-Vwi"/>
+                        <outlet property="profileImageView" destination="Gpa-er-AJR" id="yq8-6f-aWQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="7fl-5l-5wM">
-                    <connections>
-                        <action selector="onProfilePanGesture:" destination="BYZ-38-t0r" id="syo-Bb-HHn"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="103.46666666666667" y="321.39333333333332"/>
         </scene>
@@ -51,6 +43,5 @@
     <resources>
         <image name="action_buttons" width="320" height="108"/>
         <image name="nav_bar" width="320" height="65"/>
-        <image name="ryan" width="449" height="514"/>
     </resources>
 </document>
